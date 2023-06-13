@@ -1,0 +1,22 @@
+// abstract
+@import './sass/abstract/variables';
+
+// base
+@import './sass/base/reset';
+
+// layout
+@import './sass/layout/layout';
+@import './sass/layout/page';
+
+// components
+@import './sass/components/ProductsTab';
+@import './sass/components/ProductCard';
+@import './sass/components/Footer';
+@import './sass/components/Sidebar';
+@import './sass/components/Navbar';
+
+// pages
+@import './sass/pages/UserProfile';
+@import './sass/pages/ProductProfile';
+@import './sass/pages/Users';
+@import './sass/pages/Dashboard';

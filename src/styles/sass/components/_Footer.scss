@@ -1,0 +1,8 @@
+.footer {
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $backgroundColor;
+    border-top: 1px solid $primaryGreyColor;
+}

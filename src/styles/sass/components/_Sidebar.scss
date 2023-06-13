@@ -1,0 +1,110 @@
+.sidebar {
+    background-color: $backgroundColor;
+    height: 100%;
+    width: 100%;
+    border-right: 1px solid $primaryGreyColor;
+
+    &__header {
+        height: 10vh;
+        padding: 0 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-button {
+            width: 5vh;
+            height: 5vh;
+            background-color: rgb(231, 231, 231);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            & i {
+                font-size: 1em;
+            }
+
+            &:hover {
+                background-color: darken(rgb(231, 231, 231), 10%);
+            }
+        }
+    }
+
+    &__button-list {
+        margin: 0;
+        padding: 0;
+        padding-top: 1vh;
+        height: 82vh;
+        width: 100%;
+        background-color: $backgroundColor;
+
+        &-item-link {
+            width: 100%;
+            height: 100%;
+            padding: 0 90px 0  20px; 
+            display: flex;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-item-link.active {
+
+        }
+
+        &-item {
+            height: 4em;
+            width: 100%;
+            border-left: 6px solid transparent;
+            background-color: white;
+            display: flex;
+            color: $secondaryGreyColor;
+            align-items: center;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(234, 234, 234, 0.812);
+            transition: all 0.3s;
+
+            &-link.active &-div {
+                background-color: rgb(240, 240, 240);
+            }
+
+            &:hover {
+                & .sidebar__button-list-item-div {
+                    background-color: rgb(240, 240, 240);
+                }
+            }
+        }
+
+        &-item-div {
+            height: 3.2em;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        &-item-icon-div {
+            display: inline-block;
+            width: 2em;
+            height: 2em;
+            border-radius: 50%;
+            background-color: rgb(231, 231, 231);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-item-icon {
+            font-size: 1em;
+        }
+
+        &-item-text {
+            text-transform: capitalize;
+        }
+    }
+}

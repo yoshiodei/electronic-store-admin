@@ -1,0 +1,15 @@
+.layout {
+    display: flex;
+
+    &__side-bar {
+       width: 27vw;
+       height: 92vh;
+       background-color: $backgroundColor;
+    }
+
+    &__main-section {
+        width: 100%;
+        height: 92vh;
+        background-color: $backgroundColor;
+    }
+}

@@ -1,0 +1,38 @@
+.navbar {
+    height: 10vh;
+    background-color: $backgroundColor;
+    border-bottom: 1px solid $primaryGreyColor;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 25px;
+    gap: 15px;
+
+    &__icon-div {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__icon {
+        height: 5vh;
+        width: 5vh;
+        background-color: lightgrey;
+        border-radius: 50%;
+    }
+
+    &__admin-info {
+        display: inline-flex;
+        align-items: center;
+        background-color: rgb(231, 231, 231);
+        padding: 10px 13px;
+        border-radius: 50px;
+        gap: 15px;
+
+        &__image-div {
+            height: 5vh;
+            width: 5vh;
+            background-color: grey;
+            border-radius: 50%;
+        }
+    }
+}
