@@ -1,27 +1,24 @@
 import React from 'react';
 import ProductsTab from './ProductsTab';
 
-export default function UserInfoPanel() {
+export default function UserInfoPanel({ data, id }) {
   return (
     <div className="user-profile__info-div">
       <div className="user-profile__info-item">
         <h5 className="user-profile__info-title">Name:</h5>
-        <h5 className="user-profile__info-value">Kwame Bini</h5>
+        <h5 className="user-profile__info-value">{data?.displayName}</h5>
       </div>
       <div className="user-profile__info-item">
         <h5 className="user-profile__info-title">Location:</h5>
-        <h5 className="user-profile__info-value">Austin: Texas</h5>
+        <h5 className="user-profile__info-value">{data?.location ? data?.location : 'N/A'}</h5>
       </div>
       <div className="user-profile__info-item">
         <h5 className="user-profile__info-title">Bio:</h5>
         <h6 className="user-profile__info-value">
-          I sell both brand new and used iPhones.
-          The all come with accessories such as chargers,
-          earpiece and covers which are all free of charge.
-          Also get 1 year warranty on all our brand new products.
+          {data?.bio}
         </h6>
       </div>
-      <ProductsTab />
+      <ProductsTab id={id} />
     </div>
   );
 }

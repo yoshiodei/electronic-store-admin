@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from '@firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../../../config/firebaseConfig';
 
 export default function UsersPageTable() {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, 'vendors'));
-      const users = querySnapshot.docs.map((doc) => doc.data());
+      const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);
       setFilteredData(users);
@@ -24,18 +24,16 @@ export default function UsersPageTable() {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
     const filtered = data.filter(
       (vendor) => (
-        vendor.displayName.toLowerCase().includes(searchTerm.toLowerCase())
-        || vendor?.status.toLowerCase().includes(searchTerm.toLowerCase())
+        vendor.displayName.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        || vendor?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),
     );
 
     setFilteredData(filtered);
     console.log('filteredData -->', filteredData);
     setCurrentPage(1);
-    setIsLoading(false);
   }, [data, searchTerm]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -47,10 +45,6 @@ export default function UsersPageTable() {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  if (!isLoading) {
-    <div>loading ...</div>;
-  }
 
   return (
     <div className="page__table">
@@ -83,7 +77,7 @@ export default function UsersPageTable() {
               role="button"
               key={item.userId}
               className="table__row"
-              onClick={() => {}}
+              onClick={() => navigate(`/user/${item.itemID}`)}
             >
               <th scope="row">{index + 1 + ((currentPage - 1) * itemsPerPage)}</th>
               <td>{item?.displayName}</td>
@@ -97,14 +91,23 @@ export default function UsersPageTable() {
       </table>
       <div className="d-flex justify-content-center">
         <ul className="pagination">
-          <li className="page-item"><a className="page-link" href="...">Previous</a></li>
+          <li className="page-item">
+            <button
+              className="page-link"
+              type="button"
+              disabled={currentPage === 1}
+              onClick={() => paginate(currentPage - 1)}
+            >
+              Previous
+            </button>
+          </li>
           {
             Array.from({ length: Math.ceil(filteredData.length / itemsPerPage) })
               .map((_, index) => (
                 <li className="page-item">
                   <button
                     type="button"
-                    className="page-link"
+                    className={currentPage === (index + 1) ? 'page-link active' : 'page-link'}
                     onClick={() => paginate(index + 1)}
                   >
                     {index + 1}
@@ -113,7 +116,16 @@ export default function UsersPageTable() {
                 </li>
               ))
            }
-          <li className="page-item"><a className="page-link" href="...">Next</a></li>
+          <li className="page-item">
+            <button
+              className="page-link"
+              type="button"
+              disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}
+              onClick={() => paginate(currentPage + 1)}
+            >
+              Next
+            </button>
+          </li>
         </ul>
       </div>
     </div>
