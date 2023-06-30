@@ -1,18 +1,47 @@
 .dashboard {
     &__info-panels {
-        height: 25vh;
+        height: 15vh;
         display: flex;
         padding: 0 15px;
         align-items: center;
         justify-content: space-between;
-        gap: 40px;
+        gap: 15px;
     }
 
     &__panel {
-        height: 22vh;
+        height: 100%;
         flex: 1;
         border-radius: 8px;
         background-color: $backgroundColor;
-        border: 1px solid $primaryGreyColor;
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        &__icon-div {
+            width: 10vh;
+            height: 10vh;
+            border-radius: 50%;
+            background-color: lighten($primaryGreyColor, 10%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & i {
+                font-size: 1.3em;
+            }
+        }
+    }
+
+    &__bar-graph-panel, &__doughnut-graph-panel {
+        border-radius: 8px;
+        background-color: #fff;
+        width: 100%;
+        height: 52vh;
+        padding: 15px;
+    } 
+
+    &__display-graphs {
+        margin: 20px 5px 0;
     }
 }
