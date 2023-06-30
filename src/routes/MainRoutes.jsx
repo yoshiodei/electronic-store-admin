@@ -15,6 +15,7 @@ import UserReportsPage from '../pages/UserReportsPage/UserReportsPage';
 import SingleProductReport from '../pages/SingleProductReport/SingleProductReport';
 import PendingItemsPage from '../pages/PendingItemsPage/PendingItemsPage';
 import SingleUserReport from '../pages/SingleUserReport/SingleUserReport';
+import SinglePendingProduct from '../pages/SinglePendingProduct/SinglePendingProduct';
 
 export default function MainRoutes() {
   return (
@@ -45,6 +46,7 @@ export default function MainRoutes() {
             <Route path="/product/:id" element={<SingleProductPage />} />
             <Route path="/user-reports" element={<UserReportsPage />} />
             <Route path="/product-reports" element={<ProductReportsPage />} />
+            <Route path="/pending-product/:id" element={<SinglePendingProduct />} />
             <Route path="/product-report/details" element={<SingleProductReport />} />
             <Route path="/user-report/details" element={<SingleUserReport />} />
             <Route path="/promotions" element={<PromotionsPage />} />

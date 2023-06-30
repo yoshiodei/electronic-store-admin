@@ -2,6 +2,22 @@
   color: #4d4d4d;
 }
 
+@media (min-width: 1200px) {
+  .show-for-desktop-screen {
+    display: block;
+  }
+  .view-on-larger-screen {
+    display: none;
+  }
+}
+@media (max-width: 1200px) {
+  .show-for-desktop-screen {
+    display: none;
+  }
+  .view-on-larger-screen {
+    display: block;
+  }
+}
 .layout {
   display: flex;
 }
@@ -414,7 +430,7 @@
   display: flex;
   border: 1px solid rgb(211, 211, 211);
   border-radius: 8px;
-  justify-content: space-between;
+  gap: 10px;
   align-items: center;
   padding: 10px;
 }
@@ -628,4 +644,17 @@
 }
 .report-page__reported-vendor-panel__view-item-button:hover {
   background-color: #c9c9c9;
+}
+
+.promotion__empty-div {
+  background-color: #fff;
+  border-radius: 5px;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+}
+.promotion__empty-div h1 {
+  color: rgb(211, 211, 211);
 }/*# sourceMappingURL=main.css.map */
