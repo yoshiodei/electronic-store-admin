@@ -1,0 +1,15 @@
+.promotion {
+    &__empty-div {
+        background-color: $backgroundColor;
+        border-radius: 5px;
+        height: 35vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 15px;
+
+        & h1 {
+            color: $primaryGreyColor;
+        }
+    }
+}
