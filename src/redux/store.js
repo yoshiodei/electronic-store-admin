@@ -1,13 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-// import authReducer from './slice/authSlice';
-// import wishListReducer from './slice/wishListSlice';
-// import productsReducer from './slice/productsSlice';
+import reportReducer from './slice/ReportSlice';
 
 const rootReducer = combineReducers({
-//   auth: authReducer,
-//   wishList: wishListReducer,
-//   chat: chatReducer,
-//   products: productsReducer,
+  report: reportReducer,
 });
 
 const store = configureStore({
