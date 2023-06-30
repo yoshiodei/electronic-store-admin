@@ -20,9 +20,19 @@ export default function ButtonList() {
         path="/products"
       />
       <ListItem
-        title="Reports"
+        title="Pending Items"
+        icon="fa-solid fa-hourglass-start"
+        path="/pending-items"
+      />
+      <ListItem
+        title="Product Reports"
         icon="fa-solid fa-flag"
-        path="/reports"
+        path="/product-reports"
+      />
+      <ListItem
+        title="User Reports"
+        icon="fa-solid fa-flag"
+        path="/user-reports"
       />
       <ListItem
         title="Promotions"
