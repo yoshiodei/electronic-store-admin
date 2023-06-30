@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  collection, query, where, getDocs,
+} from 'firebase/firestore';
 import ProductCard from '../../../components/ProductCard/ProductCard';
+import { db } from '../../../config/firebaseConfig';
+import EmptyTab from './EmptyTab';
 
-export default function ProductsTab() {
+export default function ProductsTab({ id }) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const q = query(collection(db, 'products'), where('vendorId', '==', id));
+        const querySnapshot = await getDocs(q);
+        const allProducts = [];
+        querySnapshot.forEach((doc) => {
+          console.log('products data -->', doc.data());
+          const item = { ...doc.data(), itemID: doc.id };
+          allProducts.push(item);
+        });
+
+        console.log('all products !!', allProducts);
+        setData(allProducts);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log('final products data --', data);
+
   return (
     <div>
       <ul className="nav nav-tabs mt-4" id="myTab" role="tablist">
@@ -15,35 +46,17 @@ export default function ProductsTab() {
       <div className="tab-content" id="myTabContent">
         <div className="tab-pane fade show active products-tab__content" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">
           <div className="row g-2">
-            <div className="col-4 justify-content-center">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
-            <div className="col-4">
-              <ProductCard />
-            </div>
+            {(data.length > 0) && data.map((item) => (
+              <div className="col-4 justify-content-center">
+                <ProductCard item={item} />
+              </div>
+            ))}
+            { (data.length === 0) && <EmptyTab /> }
           </div>
         </div>
-        <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">...</div>
-        <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabIndex="0">...</div>
-        <div className="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabIndex="0">...</div>
+        <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
+          <EmptyTab />
+        </div>
       </div>
     </div>
   );
