@@ -9,8 +9,12 @@ import UsersPage from '../pages/UsersPage/UsersPage';
 import SingleUserPage from '../pages/SingleUserPage/SingleUserPage';
 import ProductsPage from '../pages/ProductsPage/ProductsPage';
 import SingleProductPage from '../pages/SingleProductPage/SingleProductPage';
-import ReportsPage from '../pages/ReportsPage/ReportsPage';
 import PromotionsPage from '../pages/PromotionsPage/PromotionsPage';
+import ProductReportsPage from '../pages/ProductReportsPage/ProductReportsPage';
+import UserReportsPage from '../pages/UserReportsPage/UserReportsPage';
+import SingleProductReport from '../pages/SingleProductReport/SingleProductReport';
+import PendingItemsPage from '../pages/PendingItemsPage/PendingItemsPage';
+import SingleUserReport from '../pages/SingleUserReport/SingleUserReport';
 
 export default function MainRoutes() {
   return (
@@ -39,8 +43,12 @@ export default function MainRoutes() {
             <Route path="/user/:id" element={<SingleUserPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/product/:id" element={<SingleProductPage />} />
-            <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/user-reports" element={<UserReportsPage />} />
+            <Route path="/product-reports" element={<ProductReportsPage />} />
+            <Route path="/product-report/details" element={<SingleProductReport />} />
+            <Route path="/user-report/details" element={<SingleUserReport />} />
             <Route path="/promotions" element={<PromotionsPage />} />
+            <Route path="/pending-items" element={<PendingItemsPage />} />
             <Route path="*" element={<div>Page Not Found</div>} />
           </Routes>
         </div>
