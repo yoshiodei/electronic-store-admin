@@ -1,0 +1,87 @@
+.report-page {
+    &__reporter-panel, &__reported-vendor-panel {
+        width: 100%;
+        max-height: 70vh;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: $backgroundColor;
+        padding: 15px;
+    }
+
+    &__panel-tile {
+        text-align: left;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.050);
+    }
+
+    &__reporter-info-div {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin: 15px 0;
+    }
+
+    &__reporter-image-div {
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        background-color: $primaryGreyColor;
+
+        & img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    &__view-reporter-button {
+        border: none;
+        width: 100%;
+        height: 2em;
+        border-radius: 4px;
+        font-size: 1.2em;
+        font-weight: 600;
+        background-color: $primaryGreyColor;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($primaryGreyColor, 5%);
+        }
+    }
+
+    &__reported-vendor-panel {
+
+        &__buttons-div {
+            display: flex;
+            gap: 15px;
+        }
+
+        &__view-item-button, &__block-item-button {
+            border: none;
+            height: 2em;
+            flex: 1;
+            border-radius: 4px;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            
+        }
+
+        &__block-item-button {
+            color: #fff;
+            background-color: $dangerRedColor;
+            &:hover {
+                background-color: darken($dangerRedColor, 4%);
+            }
+        }
+
+        &__view-item-button {
+            background-color: $primaryGreyColor;
+            &:hover {
+                background-color: darken($primaryGreyColor, 4%);
+            }
+        }
+    }
+}

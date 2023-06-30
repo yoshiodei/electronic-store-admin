@@ -26,12 +26,12 @@
         border: 1px solid $primaryGreyColor;
     }
 
-    // &__image {
-    //     width: 100%;
-    //     height: 100%;
-    //     border-radius: 5px;
-    //     object-fit: cover;
-    // }
+    &__image {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        object-fit: cover;
+    }
 
     &__product-price {
         // color: $secondaryColour;
