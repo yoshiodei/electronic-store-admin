@@ -11,7 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store} >
-      <MainRoutes />
+      <div className="view-on-larger-screen">
+        <h1>Please view on a larger desktop screen</h1>
+      </div>
+      <div className="show-for-desktop-screen">
+        <MainRoutes />
+      </div>
     </Provider>
   </React.StrictMode>
 );

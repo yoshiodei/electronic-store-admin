@@ -1,3 +1,21 @@
 *{
     color: $primaryTextColor;
 }
+
+@media (min-width: 1200px){
+    .show-for-desktop-screen {
+        display: block;
+        }
+    .view-on-larger-screen {
+            display: none;
+        }
+}
+
+@media (max-width: 1200px){
+    .show-for-desktop-screen {
+        display: none;
+        }
+    .view-on-larger-screen {
+            display: block;
+        }
+}
