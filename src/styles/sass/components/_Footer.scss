@@ -5,4 +5,8 @@
     align-items: center;
     background-color: $backgroundColor;
     border-top: 1px solid $primaryGreyColor;
+
+    & h5 {
+        color: $primaryGreyColor;
+    }
 }
