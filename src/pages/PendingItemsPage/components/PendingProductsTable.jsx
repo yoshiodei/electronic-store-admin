@@ -3,7 +3,7 @@ import { collection, getDocs } from '@firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../config/firebaseConfig';
 
-export default function ProductsPageTable() {
+export default function PendingProductsTable() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -13,7 +13,7 @@ export default function ProductsPageTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'products'));
+      const querySnapshot = await getDocs(collection(db, 'pendingItems'));
       const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);
@@ -51,7 +51,7 @@ export default function ProductsPageTable() {
   return (
     <div className="page__table">
       <div className="d-flex justify-content-between users__table-header">
-        <h5 className="mb-0">{`Total vendors - ${data.length}`}</h5>
+        <h5 className="mb-0">{`Total items - ${data.length}`}</h5>
         <input
           type="text"
           className="form-control mb-3"
@@ -79,14 +79,14 @@ export default function ProductsPageTable() {
               role="button"
               key={item.userId}
               className="table__row"
-              onClick={() => navigate(`/product/${item.itemID}`)}
+              onClick={() => navigate(`/pending-product/${item.itemID}`)}
             >
               <th scope="row">{index + 1 + ((currentPage - 1) * itemsPerPage)}</th>
               <td>{item?.name}</td>
               <td>{`$${item?.price}`}</td>
               <td>{item?.brand}</td>
               <td>{item?.isPomoted ? 'Yes' : 'No'}</td>
-              <td>{item?.status ? item?.status : 'N/A'}</td>
+              <td>pending</td>
             </tr>
           ))}
         </tbody>
