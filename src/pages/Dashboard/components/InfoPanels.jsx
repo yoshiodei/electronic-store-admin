@@ -1,6 +1,13 @@
 import React from 'react';
 
-export default function InfoPanels() {
+export default function InfoPanels({ count }) {
+  const {
+    vendorsCount,
+    pendingItemsCount,
+    productsCount,
+    averageCount,
+  } = count;
+
   return (
     <div className="dashboard__info-panels">
       <div className="dashboard__panel">
@@ -9,7 +16,7 @@ export default function InfoPanels() {
         </div>
         <div className="dashboard__panel__info-div">
           <h6 className="mb-0">Total Users</h6>
-          <h3 className="mb-0">4,502</h3>
+          <h3 className="mb-0">{vendorsCount}</h3>
         </div>
       </div>
       <div className="dashboard__panel">
@@ -18,7 +25,7 @@ export default function InfoPanels() {
         </div>
         <div className="dashboard__panel__info-div">
           <h6 className="mb-0">Total Posts</h6>
-          <h3 className="mb-0">18,276</h3>
+          <h3 className="mb-0">{productsCount}</h3>
         </div>
       </div>
       <div className="dashboard__panel">
@@ -27,7 +34,7 @@ export default function InfoPanels() {
         </div>
         <div className="dashboard__panel__info-div">
           <h6 className="mb-0">Total Pending Posts</h6>
-          <h3 className="mb-0">245</h3>
+          <h3 className="mb-0">{pendingItemsCount}</h3>
         </div>
       </div>
       <div className="dashboard__panel">
@@ -36,7 +43,7 @@ export default function InfoPanels() {
         </div>
         <div className="dashboard__panel__info-div">
           <h6 className="mb-0">Average Post/User</h6>
-          <h3 className="mb-0">27</h3>
+          <h3 className="mb-0">{Math.round(averageCount)}</h3>
         </div>
       </div>
     </div>
