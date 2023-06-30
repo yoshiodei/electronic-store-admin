@@ -51,7 +51,7 @@ export default function ProductsPageTable() {
   return (
     <div className="page__table">
       <div className="d-flex justify-content-between users__table-header">
-        <h5 className="mb-0">{`Total vendors - ${data.length}`}</h5>
+        <h5 className="mb-0">{`Total items - ${data.length}`}</h5>
         <input
           type="text"
           className="form-control mb-3"
