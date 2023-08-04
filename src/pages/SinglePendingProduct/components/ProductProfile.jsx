@@ -37,7 +37,7 @@ export default function ProductProfile() {
         notifications: arrayUnion(messageObj),
       });
 
-      navigate('/');
+      navigate('/pending-items');
       setIsPosting(false);
       handleClosePostModal();
     } catch (err) {

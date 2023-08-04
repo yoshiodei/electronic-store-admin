@@ -26,10 +26,10 @@ export default function PendingProductsTable() {
   useEffect(() => {
     const filtered = data.filter(
       (item) => (
-        item.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())
-        || item.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        || item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),
     );
 
