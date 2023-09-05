@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from '@firebase/firestore';
+import {
+  collection, getDocs, query, where,
+} from '@firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../config/firebaseConfig';
 
@@ -13,7 +15,11 @@ export default function PendingProductsTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'pendingItems'));
+      const q = query(
+        collection(db, 'pendingItems'),
+        where('status', '==', 'pending'),
+      );
+      const querySnapshot = await getDocs(q);
       const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);

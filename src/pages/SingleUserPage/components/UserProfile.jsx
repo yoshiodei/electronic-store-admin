@@ -15,8 +15,9 @@ export default function UsersPage() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setData(docSnap.data());
-        console.log('Document data id -->', docSnap.data());
+        const userData = docSnap.data();
+        setData(userData);
+        console.log('Document data id -->', userData);
         console.log('set data -->', data);
       } else {
       // docSnap.data() will be undefined in this case

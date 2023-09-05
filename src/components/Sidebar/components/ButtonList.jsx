@@ -25,6 +25,11 @@ export default function ButtonList() {
         path="/pending-items"
       />
       <ListItem
+        title="Blocked Items"
+        icon="fa-solid fa-ban"
+        path="/blocked-items"
+      />
+      <ListItem
         title="Product Reports"
         icon="fa-solid fa-flag"
         path="/product-reports"

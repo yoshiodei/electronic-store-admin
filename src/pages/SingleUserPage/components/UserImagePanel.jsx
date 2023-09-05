@@ -1,65 +1,69 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
 import { db } from '../../../config/firebaseConfig';
 import profile from '../../../assets/images/profile.jpg';
 
 export default function UserImagePanel({ data }) {
   const [show, setShow] = useState(false);
   const [unsuspendShow, setUnsuspendShow] = useState(false);
+  const { id } = useParams();
 
-  const [status, setStatus] = useState((data?.status === 'suspended'));
+  const [status, setStatus] = useState(data?.status);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleCloseUnsuspend = () => setUnsuspendShow(false);
   const handleShowUnsuspend = () => setUnsuspendShow(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUnsuspend = async () => {
     try {
+      setIsLoading(true);
       const messageObj = {
         message: 'Congratulations, your account has been re-activated.',
         heading: 'Account Activation',
         modifiedAt: Date.now(),
       };
 
-      const vendorRef = doc(db, 'vendors', data.userId);
+      const vendorRef = doc(db, 'vendors', id);
 
       await updateDoc(vendorRef, {
         status: 'active',
-      });
-
-      await updateDoc(vendorRef, {
         notifications: arrayUnion(messageObj),
       });
 
-      setStatus(!status);
+      setStatus('active');
+      setIsLoading(false);
     } catch (err) {
       console.log(err.message);
+      setIsLoading(false);
     }
 
     handleCloseUnsuspend();
   };
 
   const handleSuspend = async () => {
+    console.log('handle Suspend runs');
     try {
+      setIsLoading(true);
       const messageObj = {
         message: 'After going through some reports and complaints on your account, it as been decided to suspend your account for an indefinite number of days. You will be notified once your account is reactivated',
         heading: 'Account Suspension',
         modifiedAt: Date.now(),
       };
 
-      const vendorRef = doc(db, 'vendors', data.userId);
+      const vendorRef = doc(db, 'vendors', id);
       await updateDoc(vendorRef, {
         status: 'suspended',
-      });
-
-      await updateDoc(vendorRef, {
         notifications: arrayUnion(messageObj),
       });
 
-      setStatus(!status);
+      setStatus('suspended');
+      setIsLoading(false);
     } catch (err) {
       console.log(err.message);
+      setIsLoading(false);
     }
 
     handleClose();
@@ -86,7 +90,7 @@ export default function UserImagePanel({ data }) {
             <h4>{ data?.posts ? data?.posts : 'N/A' }</h4>
           </div>
         </div>
-        { status
+        { (status === 'suspended')
         && (
         <button
           onClick={handleShowUnsuspend}
@@ -96,7 +100,7 @@ export default function UserImagePanel({ data }) {
           Unsuspend User
         </button>
         )}
-        { !status
+        { (status === 'active')
         && (
         <button
           onClick={handleShow}
@@ -119,7 +123,7 @@ export default function UserImagePanel({ data }) {
         </Modal.Body>
         <Modal.Footer>
           <button className="user-profile__modal__unsuspend-button" type="button" onClick={handleUnsuspend}>
-            Yes, re-activate user
+            {isLoading ? '...Loading' : 'Yes, re-activate user'}
           </button>
           <button className="user-profile__modal__close-button" type="button" onClick={handleCloseUnsuspend}>
             No, close
@@ -137,8 +141,8 @@ export default function UserImagePanel({ data }) {
           <h5>Are you sure you&apos;d want to suspend this user?</h5>
         </Modal.Body>
         <Modal.Footer>
-          <button className="user-profile__modal__suspend-button" type="button" onClick={handleSuspend}>
-            Yes, suspend user
+          <button className="user-profile__modal__suspend-button" disabled={isLoading} type="button" onClick={handleSuspend}>
+            {isLoading ? '...Loading' : 'Yes, suspend user'}
           </button>
           <button className="user-profile__modal__close-button" type="button" onClick={handleClose}>
             No, close

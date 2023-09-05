@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  arrayUnion, doc, getDoc, updateDoc,
+  arrayUnion, deleteDoc, doc, getDoc, updateDoc,
 } from 'firebase/firestore';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -87,7 +87,10 @@ export default function ProductProfile() {
       };
 
       const productRef = doc(db, 'products', id);
+      const pendingRef = doc(db, 'pendingItems', id);
       const vendorRef = doc(db, 'vendors', data.vendorId);
+
+      await deleteDoc(pendingRef);
 
       await updateDoc(productRef, {
         status: 'active',
@@ -183,13 +186,15 @@ export default function ProductProfile() {
               <h5 className="product-profile__info-value">{status || 'N/A'}</h5>
             </div>
           </div>
+          {(data?.vendorId) && (
           <button
             className="product-profile__post-button success mt-3"
             type="button"
             onClick={handleNavigate}
           >
-            View Vendor
+            View Vendor !!
           </button>
+          )}
           {(status === 'pending') && (<button className="product-profile__post-button" type="button" onClick={handleShowPostModal}>Post Item</button>)}
           {(status === 'active') && (<button className="product-profile__post-button" type="button" onClick={handleShowBlockPostModal}>Block Item</button>)}
           {(status === 'blocked') && (<button className="product-profile__post-button" type="button" onClick={handleShow}>Unblock Item</button>)}

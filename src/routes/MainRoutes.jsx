@@ -16,6 +16,7 @@ import SingleProductReport from '../pages/SingleProductReport/SingleProductRepor
 import PendingItemsPage from '../pages/PendingItemsPage/PendingItemsPage';
 import SingleUserReport from '../pages/SingleUserReport/SingleUserReport';
 import SinglePendingProduct from '../pages/SinglePendingProduct/SinglePendingProduct';
+import BlockedItemsPage from '../pages/BlockedItemsPage/BlockedItemsPage';
 
 export default function MainRoutes() {
   return (
@@ -51,6 +52,7 @@ export default function MainRoutes() {
             <Route path="/user-report/details" element={<SingleUserReport />} />
             <Route path="/promotions" element={<PromotionsPage />} />
             <Route path="/pending-items" element={<PendingItemsPage />} />
+            <Route path="/blocked-items" element={<BlockedItemsPage />} />
             <Route path="*" element={<div>Page Not Found</div>} />
           </Routes>
         </div>

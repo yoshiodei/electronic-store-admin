@@ -5,7 +5,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../config/firebaseConfig';
 
-export default function ProductsPageTable() {
+export default function BlockedProductsTable() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -17,7 +17,7 @@ export default function ProductsPageTable() {
     const fetchData = async () => {
       const q = query(
         collection(db, 'products'),
-        where('status', '==', 'active'),
+        where('status', '==', 'blocked'),
       );
       const querySnapshot = await getDocs(q);
       const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
@@ -34,7 +34,7 @@ export default function ProductsPageTable() {
       (item) => (
         item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
-        || item?.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        || item.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),
     );
@@ -92,7 +92,7 @@ export default function ProductsPageTable() {
               <td>{`$${item?.price}`}</td>
               <td>{item?.brand}</td>
               <td>{item?.isPomoted ? 'Yes' : 'No'}</td>
-              <td>{item?.status ? item?.status : 'N/A'}</td>
+              <td>{item?.status}</td>
             </tr>
           ))}
         </tbody>

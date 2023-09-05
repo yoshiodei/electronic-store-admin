@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  arrayUnion, doc, getDoc, updateDoc, deleteDoc, setDoc,
+  arrayUnion, doc, getDoc, updateDoc, deleteDoc,
 } from 'firebase/firestore';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,14 +22,17 @@ export default function ProductProfile() {
     try {
       setIsPosting(true);
       const messageObj = {
-        message: `Congratulations, your item, ${data?.name}, has been posted. It is now available to be viewed by all on this paltform`,
+        message: `Congratulations, your item, ${data?.name}, has been posted. It is now available to be viewed by all on this platform`,
         heading: 'Post Product',
         modifiedAt: Date.now(),
       };
 
-      const vendorRef = doc(db, 'vendors', data.vendorId);
+      const vendorId = data?.vendorId || data?.vendor?.userId;
 
-      await setDoc(doc(db, 'products', id), { ...data, status: 'active', postDate: Date.now() });
+      const vendorRef = doc(db, 'vendors', vendorId);
+      const productRef = doc(db, 'products', id);
+
+      // await setDoc(productRef, { ...data, status: 'active', datePosted: Date.now() });
 
       await deleteDoc(doc(db, 'pendingItems', id));
 
@@ -37,11 +40,17 @@ export default function ProductProfile() {
         notifications: arrayUnion(messageObj),
       });
 
+      await updateDoc(productRef, {
+        status: 'active',
+        datePosted: Date.now(),
+      });
+
       navigate('/pending-items');
-      setIsPosting(false);
       handleClosePostModal();
+      setIsPosting(false);
     } catch (err) {
       setIsPosting(false);
+      handleClosePostModal();
       console.log(err.message);
     }
   };
@@ -65,8 +74,10 @@ export default function ProductProfile() {
   }, []);
 
   const handleNavigate = () => {
-    if (data?.vendorId) {
-      navigate(`/user/${data.vendorId}`);
+    const vendorId = data?.vendorId || data?.vendor?.userId;
+
+    if (vendorId) {
+      navigate(`/user/${vendorId}`);
     }
   };
 
@@ -124,6 +135,7 @@ export default function ProductProfile() {
               <h5 className="product-profile__info-value">pending</h5>
             </div>
           </div>
+          {(data?.vendorId || data?.vendor?.userId) && (
           <button
             className="product-profile__post-button mt-3"
             type="button"
@@ -131,6 +143,7 @@ export default function ProductProfile() {
           >
             View Vendor
           </button>
+          )}
           <button className="product-profile__post-button success" type="button" onClick={handleShowPostModal}>Post Item</button>
         </div>
       </div>

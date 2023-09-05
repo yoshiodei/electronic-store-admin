@@ -12,7 +12,7 @@ export default function ProductCard({ item }) {
       <div className="product-card__product-location-div d-flex align-items-center">
         <i className="product-card__product-location-icon fa-solid fa-location-dot" />
         <p className="product-card__product-location-name">
-          {item?.location ? item?.location : 'N/A'}
+          {item?.location?.locationIsSet ? `${item?.location?.town}, ${item?.location?.state}` : 'N/A'}
         </p>
       </div>
       <div className="product-card__product-condition-div">

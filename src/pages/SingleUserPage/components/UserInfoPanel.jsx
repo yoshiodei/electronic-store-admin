@@ -10,7 +10,7 @@ export default function UserInfoPanel({ data, id }) {
       </div>
       <div className="user-profile__info-item">
         <h5 className="user-profile__info-title">Location:</h5>
-        <h5 className="user-profile__info-value">{data?.location ? data?.location : 'N/A'}</h5>
+        <h5 className="user-profile__info-value">{data?.location?.locationIsSet ? `${data?.location?.town}, ${data?.location?.state} - ${data?.location?.country}` : 'N/A'}</h5>
       </div>
       <div className="user-profile__info-item">
         <h5 className="user-profile__info-title">Bio:</h5>
