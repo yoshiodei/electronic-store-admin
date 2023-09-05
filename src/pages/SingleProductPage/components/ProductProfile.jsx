@@ -192,7 +192,7 @@ export default function ProductProfile() {
             type="button"
             onClick={handleNavigate}
           >
-            View Vendor !!
+            View Vendor
           </button>
           )}
           {(status === 'pending') && (<button className="product-profile__post-button" type="button" onClick={handleShowPostModal}>Post Item</button>)}
