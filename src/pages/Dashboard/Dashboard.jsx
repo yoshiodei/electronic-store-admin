@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection, getDocs, query, where,
+} from '@firebase/firestore';
 import InfoPanels from './components/InfoPanels';
 import Header from '../components/Header';
 import DisplayGraphs from './components/DisplayGraphs';
@@ -17,7 +19,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       const vendorsSnap = await getDocs(collection(db, 'vendors'));
-      const pendingItemsSnap = await getDocs(collection(db, 'pendingItems'));
+      const pendingItemsSnap = await getDocs(query(collection(db, 'products'), where('status', '==', 'pending')));
       const productsSnap = await getDocs(collection(db, 'products'));
       const vendorsCount = vendorsSnap.size;
       const pendingItemsCount = pendingItemsSnap.size;
