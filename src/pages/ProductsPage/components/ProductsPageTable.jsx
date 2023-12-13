@@ -21,6 +21,7 @@ export default function ProductsPageTable() {
       );
       const querySnapshot = await getDocs(q);
       const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
+      console.log('here are the users', users);
 
       setData(users);
       setFilteredData(users);
@@ -77,6 +78,7 @@ export default function ProductsPageTable() {
             <th scope="col">Brand</th>
             <th scope="col">Item Is Promoted</th>
             <th scope="col">Status</th>
+            <h scope="col">DatePosted</h>
           </tr>
         </thead>
         <tbody>
@@ -93,6 +95,7 @@ export default function ProductsPageTable() {
               <td>{item?.brand}</td>
               <td>{item?.isPomoted ? 'Yes' : 'No'}</td>
               <td>{item?.status ? item?.status : 'N/A'}</td>
+              <td>{item?.datePosted}</td>
             </tr>
           ))}
         </tbody>
