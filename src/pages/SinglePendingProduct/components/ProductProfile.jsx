@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  arrayUnion, doc, getDoc, updateDoc, deleteDoc,
+  arrayUnion, doc, getDoc, updateDoc,
 } from 'firebase/firestore';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -26,15 +26,13 @@ export default function ProductProfile() {
         heading: 'Post Product',
         modifiedAt: Date.now(),
       };
-
-      const vendorId = data?.vendorId || data?.vendor?.userId;
-
+      const vendorId = data?.vendor?.uid;
+      console.log('here is the vendor id', vendorId);
       const vendorRef = doc(db, 'vendors', vendorId);
       const productRef = doc(db, 'products', id);
-
       // await setDoc(productRef, { ...data, status: 'active', datePosted: Date.now() });
 
-      await deleteDoc(doc(db, 'pendingItems', id));
+      // await deleteDoc(doc(db, 'pendingItems', id));
 
       await updateDoc(vendorRef, {
         notifications: arrayUnion(messageObj),
@@ -44,6 +42,7 @@ export default function ProductProfile() {
         status: 'active',
         datePosted: Date.now(),
       });
+      console.log('here are the reference', vendorRef, vendorId, productRef);
 
       navigate('/pending-items');
       handleClosePostModal();
@@ -57,7 +56,7 @@ export default function ProductProfile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const docRef = doc(db, 'pendingItems', id);
+      const docRef = doc(db, 'products', id);
       console.log('pending id', id);
       const docSnap = await getDoc(docRef);
 
@@ -74,7 +73,7 @@ export default function ProductProfile() {
   }, []);
 
   const handleNavigate = () => {
-    const vendorId = data?.vendorId || data?.vendor?.userId;
+    const vendorId = data?.vendorId || data?.vendor?.uid;
 
     if (vendorId) {
       navigate(`/user/${vendorId}`);
@@ -135,7 +134,7 @@ export default function ProductProfile() {
               <h5 className="product-profile__info-value">pending</h5>
             </div>
           </div>
-          {(data?.vendorId || data?.vendor?.userId) && (
+          {(data?.vendorId || data?.vendor?.uid) && (
           <button
             className="product-profile__post-button mt-3"
             type="button"

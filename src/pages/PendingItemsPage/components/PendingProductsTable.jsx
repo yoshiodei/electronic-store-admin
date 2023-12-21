@@ -16,11 +16,11 @@ export default function PendingProductsTable() {
   useEffect(() => {
     const fetchData = async () => {
       const q = query(
-        collection(db, 'pendingItems'),
+        collection(db, 'products'),
         where('status', '==', 'pending'),
       );
       const querySnapshot = await getDocs(q);
-      const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
+      const users = querySnapshot.docs.map(doc => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);
       setFilteredData(users);
@@ -31,11 +31,12 @@ export default function PendingProductsTable() {
 
   useEffect(() => {
     const filtered = data.filter(
-      (item) => (
+      item => (
         item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        || item?.datePosted?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),
     );
 
@@ -77,6 +78,7 @@ export default function PendingProductsTable() {
             <th scope="col">Brand</th>
             <th scope="col">Item Is Promoted</th>
             <th scope="col">Status</th>
+            <th scope="col">DatePosted</th>
           </tr>
         </thead>
         <tbody>
