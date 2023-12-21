@@ -20,7 +20,7 @@ export default function PendingProductsTable() {
         where('status', '==', 'pending'),
       );
       const querySnapshot = await getDocs(q);
-      const users = querySnapshot.docs.map(doc => ({ ...doc.data(), itemID: doc.id }));
+      const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);
       setFilteredData(users);
@@ -28,10 +28,9 @@ export default function PendingProductsTable() {
 
     fetchData();
   }, []);
-
   useEffect(() => {
     const filtered = data.filter(
-      item => (
+      (item) => (
         item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())

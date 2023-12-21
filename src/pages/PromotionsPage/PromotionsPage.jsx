@@ -43,7 +43,7 @@ export default function PromotionsPage() {
             </tr>
           </thead>
           <tbody>
-            {promoData.map(item => (
+            {promoData.map((item) => (
               <tr key={item.itemID}>
                 <td>{item.brand || ''}</td>
                 <td>{item.vendor?.name || ''}</td>
