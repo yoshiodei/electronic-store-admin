@@ -17,12 +17,12 @@
         "react"
     ],
     "rules": {
-        "arrow-parens": ["error", "as-needed"],
-        //"arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
-        "indent": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "import/no-extraneous-dependencies": "off",
         "react/prop-types": "off",
-        "no-param-reassign": "off"
+        "import/no-extraneous-dependencies": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "no-param-reassign": "off",
+        "no-restricted-globals": "off",
+        "react/jsx-filename-extension": "off",
+        "radix": "off"
     }
 }
