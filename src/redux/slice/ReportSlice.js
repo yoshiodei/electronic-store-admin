@@ -48,6 +48,6 @@ const reportSlice = createSlice({
   },
 });
 
-export const selectReportState = state => state.report;
+export const selectReportState = (state) => state.report;
 
 export default reportSlice.reducer;

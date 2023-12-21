@@ -14,7 +14,7 @@ export default function UsersPageTable() {
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, 'vendors'));
-      const users = querySnapshot.docs.map(doc => ({ ...doc.data(), itemID: doc.id }));
+      const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);
       setFilteredData(users);
@@ -25,7 +25,7 @@ export default function UsersPageTable() {
   console.log('data for users', data);
   useEffect(() => {
     const filtered = data.filter(
-      vendor => (
+      (vendor) => (
         vendor.displayName.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || vendor?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),
@@ -81,7 +81,7 @@ export default function UsersPageTable() {
               onClick={() => navigate(`/user/${item.itemID}`)}
             >
               <th scope="row">{index + 1 + ((currentPage - 1) * itemsPerPage)}</th>
-              <td>{item?.firstName} {item?.lastName}</td>
+              <td>{item?.firstName}</td>
               <td>{item?.rating && item.rating.length > 0 ? item.rating.reduce((acc, val) => acc + val) : 'No Rating'}</td>
               <td>{item?.isPremium ? 'Yes' : 'No'}</td>
               <td>{item?.productsPosted}</td>

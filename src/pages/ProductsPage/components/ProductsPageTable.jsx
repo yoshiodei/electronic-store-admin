@@ -20,7 +20,7 @@ export default function ProductsPageTable() {
         where('status', '==', 'active'),
       );
       const querySnapshot = await getDocs(q);
-      const users = querySnapshot.docs.map(doc => ({ ...doc.data(), itemID: doc.id }));
+      const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
       console.log('here are the users', users);
 
       setData(users);
@@ -32,7 +32,7 @@ export default function ProductsPageTable() {
 
   useEffect(() => {
     const filtered = data.filter(
-      item => (
+      (item) => (
         item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())

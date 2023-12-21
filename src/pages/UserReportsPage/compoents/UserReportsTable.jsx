@@ -41,7 +41,7 @@ export default function UserReportsTable() {
 
   useEffect(() => {
     const filtered = data.filter(
-      item => (
+      (item) => (
         item?.reportType.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.reportedItemName?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.reportedItemVendorName?.toLowerCase().includes(searchTerm.trim().toLowerCase())
