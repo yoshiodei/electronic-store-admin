@@ -17,6 +17,7 @@
         "react"
     ],
     "rules": {
+        "arrow-parens": ["error", "always"],
         "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
         "indent": "off",
         "react/jsx-one-expression-per-line": "off",
