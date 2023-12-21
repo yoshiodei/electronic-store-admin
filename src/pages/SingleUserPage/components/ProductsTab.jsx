@@ -46,7 +46,7 @@ export default function ProductsTab({ id }) {
       <div className="tab-content" id="myTabContent">
         <div className="tab-pane fade show active products-tab__content" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabIndex="0">
           <div className="row g-2">
-            {(data.length > 0) && data.map((item) => (
+            {(data.length > 0) && data.map(item => (
               <div className="col-4 justify-content-center">
                 <ProductCard item={item} />
               </div>

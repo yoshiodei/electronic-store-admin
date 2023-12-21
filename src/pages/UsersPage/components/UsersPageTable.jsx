@@ -14,7 +14,7 @@ export default function UsersPageTable() {
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, 'vendors'));
-      const users = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
+      const users = querySnapshot.docs.map(doc => ({ ...doc.data(), itemID: doc.id }));
 
       setData(users);
       setFilteredData(users);
@@ -25,7 +25,7 @@ export default function UsersPageTable() {
   console.log('data for users', data);
   useEffect(() => {
     const filtered = data.filter(
-      (vendor) => (
+      vendor => (
         vendor.displayName.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || vendor?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),

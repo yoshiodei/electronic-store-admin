@@ -16,7 +16,7 @@ export default function PromotionsPage() {
           where('isPromoted', '==', false),
         );
         const querySnapshot = await getDocs(q);
-        const promotedItems = querySnapshot.docs.map((doc) => ({ ...doc.data(), itemID: doc.id }));
+        const promotedItems = querySnapshot.docs.map(doc => ({ ...doc.data(), itemID: doc.id }));
 
         setPromoData(promotedItems);
       } catch (error) {
