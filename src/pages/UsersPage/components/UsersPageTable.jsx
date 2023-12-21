@@ -22,7 +22,7 @@ export default function UsersPageTable() {
 
     fetchData();
   }, []);
-
+  console.log('data for users', data);
   useEffect(() => {
     const filtered = data.filter(
       (vendor) => (
@@ -68,6 +68,7 @@ export default function UsersPageTable() {
             <th scope="col">Rating</th>
             <th scope="col">User Is Premium</th>
             <th scope="col">No. of Posts</th>
+            <th scope="col">Items Sold</th>
             <th scope="col">Status</th>
           </tr>
         </thead>
@@ -80,10 +81,11 @@ export default function UsersPageTable() {
               onClick={() => navigate(`/user/${item.itemID}`)}
             >
               <th scope="row">{index + 1 + ((currentPage - 1) * itemsPerPage)}</th>
-              <td>{item?.displayName}</td>
-              <td>{item?.rating}</td>
+              <td>{item?.firstName} {item?.lastName}</td>
+              <td>{item?.rating && item.rating.length > 0 ? item.rating.reduce((acc, val) => acc + val) : 'No Rating'}</td>
               <td>{item?.isPremium ? 'Yes' : 'No'}</td>
-              <td>{item?.posts ? item?.posts : 'N/A'}</td>
+              <td>{item?.productsPosted}</td>
+              <td>{item?.productsSold}</td>
               <td>{item?.status ? item?.status : 'N/A'}</td>
             </tr>
           ))}

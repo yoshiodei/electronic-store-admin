@@ -16,7 +16,7 @@ export default function PendingProductsTable() {
   useEffect(() => {
     const fetchData = async () => {
       const q = query(
-        collection(db, 'pendingItems'),
+        collection(db, 'products'),
         where('status', '==', 'pending'),
       );
       const querySnapshot = await getDocs(q);
@@ -36,6 +36,7 @@ export default function PendingProductsTable() {
         || item?.status?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item.category?.toLowerCase().includes(searchTerm.trim().toLowerCase())
         || item?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        || item?.datePosted?.toLowerCase().includes(searchTerm.trim().toLowerCase())
       ),
     );
 
@@ -77,6 +78,7 @@ export default function PendingProductsTable() {
             <th scope="col">Brand</th>
             <th scope="col">Item Is Promoted</th>
             <th scope="col">Status</th>
+            <th scope="col">DatePosted</th>
           </tr>
         </thead>
         <tbody>
