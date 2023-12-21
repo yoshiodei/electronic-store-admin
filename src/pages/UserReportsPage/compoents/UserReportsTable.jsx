@@ -94,7 +94,7 @@ export default function UserReportsTable() {
           </tr>
         </thead>
         <tbody>
-          { currentItems.map((iitem, index) => (
+          { currentItems.map((item, index) => (
             <tr
               role="button"
               key={item.userId}
